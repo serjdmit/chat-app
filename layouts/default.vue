@@ -1,6 +1,6 @@
 <template>
   <v-app app>
-    <h1>Hello world</h1>
+    <nuxt />
   </v-app>
 </template>
 
