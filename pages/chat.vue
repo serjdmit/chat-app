@@ -1,13 +1,6 @@
 <template>
   <div class="c-wrap">
-    <v-app-bar>
-      <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-      <v-btn @click="exit" icon class="mr-3">
-        <v-icon>mdi-arrow-left</v-icon>
-      </v-btn>
-      <v-toolbar-title>Chat room {{ user.room }}</v-toolbar-title>
-    </v-app-bar>
-    <div class="c-chat">
+    <div class="c-chat" ref="block">
       <Message
         v-for="message in messages"
         :key="message.text"
@@ -30,15 +23,16 @@ export default {
   middleware: ['chat'],
   components: { Message, ChatForm },
   computed: mapState(['user', 'messages']),
+  watch: {
+    messages() {
+      setTimeout(() => {
+        this.$refs.block.scrollTop = this.$refs.block.scrollHeight
+      })
+    }
+  },
   head() {
     return {
       title: `Room ${this.user.room}`
-    }
-  },
-  methods: {
-    exit() {
-      this.$router.push('/?messsage=userLeft')
-      this.clearData()
     }
   }
 }
@@ -49,6 +43,7 @@ export default {
   height: 100%;
   position: relative;
   overflow: hidden;
+  margin-top: -65px;
 }
 .c-form {
   position: absolute;
@@ -56,7 +51,7 @@ export default {
   left: 0;
   right: 0;
   padding: 1rem;
-  height: 80px;
+  height: 85px;
   background: #212121;
 }
 .c-chat {
@@ -64,7 +59,7 @@ export default {
   top: 65px;
   right: 0;
   left: 0;
-  bottom: 80px;
+  bottom: 85px;
   padding: 1rem;
   overflow-y: auto;
 }

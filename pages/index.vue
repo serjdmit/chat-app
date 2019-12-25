@@ -2,6 +2,12 @@
   <v-layout column justify-center align-center>
     <v-flex xs12 sm8>
       <v-card min-width="400">
+        <v-snackbar v-model="snackbar" top>
+          {{ message }}
+          <v-btn dark text @click="snackbar = false">
+            Close
+          </v-btn>
+        </v-snackbar>
         <v-card-title><h1>Nuxt chat</h1></v-card-title>
         <v-card-text>
           <v-form ref="form" v-model="valid" lazy-validation>
@@ -40,6 +46,8 @@ export default {
   data: () => ({
     valid: true,
     name: '',
+    snackbar: false,
+    message: '',
     nameRules: [
       (v) => !!v || 'Name is required',
       (v) => (v && v.length <= 16) || 'Name must be less than 16 characters'
@@ -54,6 +62,17 @@ export default {
       // eslint-disable-next-line
       console.log('socket connected')
     }
+  },
+  mounted() {
+    const { message } = this.$route.query
+    if (message === 'noUser') {
+      this.message = 'Enter your data'
+    } else if (message === 'userLeft') {
+      this.message = 'You left the chat'
+    }
+    // this.snackbar = true
+    console.log(this.message)
+    this.snackbar = !!this.message
   },
   methods: {
     ...mapMutations(['setUser']),
