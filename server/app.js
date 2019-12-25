@@ -1,6 +1,7 @@
 const app = require('express')()
 const server = require('http').createServer(app)
 const io = require('socket.io')(server)
+const users = require('./users')()
 
 const message = (name, text, id) => ({ name, text, id })
 
@@ -11,20 +12,34 @@ io.on('connection', (socket) => {
     }
 
     socket.join(data.room)
+
+    users.remove(socket.id)
+    users.add({
+      id: socket.id,
+      name: data.name,
+      room: data.room
+    })
+
     cb({ userId: socket.id })
     socket.emit('newMessage', message('admin', `Welcome ${data.name}.`))
     socket.broadcast
       .to(data.room)
       .emit('newMessage', message('admin', `User ${data.name} joined.`))
-      .emit('newMessage', message('TEST', 'asdasd.'))
   })
 
-  socket.on('createMessage', (data) => {
-    setTimeout(function() {
-      socket.emit('newMessage', {
-        text: data.text + ' SERVER'
-      })
-    }, 500)
+  socket.on('createMessage', (data, cb) => {
+    if (!data.text) {
+      return cb("Text can't be empty")
+    }
+
+    const user = users.get(data.id)
+    if (user) {
+      io.to(user.room).emit(
+        'newMessage',
+        message(user.name, data.text, data.id)
+      )
+    }
+    cb()
   })
 })
 
