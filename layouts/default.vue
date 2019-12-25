@@ -1,7 +1,7 @@
 <template>
   <v-app app>
     <v-content>
-      <v-navigation-drawer v-model="drawer" app>
+      <v-navigation-drawer v-model="drawer" mobile-break-point="650" app>
         <v-list subheader>
           <v-subheader>Recent chat</v-subheader>
 
@@ -18,14 +18,7 @@
           </v-list-item>
         </v-list>
       </v-navigation-drawer>
-      <v-app-bar>
-        <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
-        <v-btn @click="exit" icon class="mr-3">
-          <v-icon>mdi-arrow-left</v-icon>
-        </v-btn>
-        <v-toolbar-title>Chat room {{ user.room }}</v-toolbar-title>
-      </v-app-bar>
-      <div><nuxt /></div>
+      <div style="height: 100%;"><nuxt /></div>
     </v-content>
   </v-app>
 </template>
@@ -42,11 +35,7 @@ export default {
   }),
   computed: mapState(['user']),
   methods: {
-    ...mapMutations(['clearData']),
-    exit() {
-      this.$router.push('/?messsage=userLeft')
-      this.clearData()
-    }
+    ...mapMutations(['clearData'])
   }
 }
 </script>
