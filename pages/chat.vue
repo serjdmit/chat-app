@@ -12,12 +12,11 @@
 import { mapState } from 'vuex'
 export default {
   middleware: ['chat'],
-  computed: mapState(['user']),
+  computed: mapState(['user', 'messages']),
   head() {
     return {
       title: `Room ${this.user.room}`
     }
-  },
-  computed: mapState(['user', 'messages'])
+  }
 }
 </script>

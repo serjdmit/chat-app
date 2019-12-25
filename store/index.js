@@ -8,13 +8,10 @@ export const mutations = {
     state.user = user
   },
   clearData(state) {
-    ;(state.user = {}), (state.messages = [])
-  }
-}
-
-export const actions = {
-  SOCKET_newMessage(ctx, data) {
-    // eslint-disable-next-line
-    console.log('Message recieved ' + data.text)
+    state.user = {}
+    state.messages = []
+  },
+  SOCKET_newMessage(state, message) {
+    state.messages.push(message)
   }
 }
