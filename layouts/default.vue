@@ -1,7 +1,7 @@
 <template>
   <v-app app>
     <v-content>
-      <v-app-bar>
+      <v-app-bar class="app-bar">
         <v-app-bar-nav-icon @click="drawer = !drawer"></v-app-bar-nav-icon>
         <v-btn @click="exit" icon class="mr-3">
           <v-icon>mdi-arrow-left</v-icon>
@@ -26,7 +26,7 @@
         </v-list>
       </v-navigation-drawer>
 
-      <div style="height: 100%;"><nuxt /></div>
+      <div style="height: calc(100% - 65px)"><nuxt /></div>
     </v-content>
   </v-app>
 </template>

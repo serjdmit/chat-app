@@ -43,7 +43,6 @@ export default {
   height: 100%;
   position: relative;
   overflow: hidden;
-  margin-top: -65px;
 }
 .c-form {
   position: absolute;
@@ -56,7 +55,7 @@ export default {
 }
 .c-chat {
   position: absolute;
-  top: 65px;
+  top: 0;
   right: 0;
   left: 0;
   bottom: 85px;
