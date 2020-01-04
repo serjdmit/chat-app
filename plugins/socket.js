@@ -5,8 +5,7 @@ export default function({ store }) {
   Vue.use(
     new VueSocketIO({
       debug: false,
-      connection:
-        'https://cdn.jsdelivr.net/npm/workbox-cdn@4.3.1/workbox/workbox-strategies.prod.js:1:2145',
+      connection: 'http://localhost:8080',
       vuex: {
         store,
         actionPrefix: 'SOCKET_',
