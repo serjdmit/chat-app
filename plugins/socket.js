@@ -5,7 +5,8 @@ export default function({ store }) {
   Vue.use(
     new VueSocketIO({
       debug: false,
-      connection: 'https://safe-nuxt-app.netlify.com',
+      connection:
+        'https://cdn.jsdelivr.net/npm/workbox-cdn@4.3.1/workbox/workbox-strategies.prod.js:1:2145',
       vuex: {
         store,
         actionPrefix: 'SOCKET_',
