@@ -5,7 +5,7 @@ export default function({ store }) {
   Vue.use(
     new VueSocketIO({
       debug: false,
-      connection: 'http://localhost:8080',
+      connection: 'https://safe-nuxt-app.netlify.com',
       vuex: {
         store,
         actionPrefix: 'SOCKET_',
